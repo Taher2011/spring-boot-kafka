@@ -2,9 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.2</version>
+		<groupId>com.techgen</groupId>
+		<artifactId>techgen-api-services</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>library-events-producer-service</artifactId>
