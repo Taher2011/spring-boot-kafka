@@ -1,5 +1,7 @@
 package com.techgen.kafka.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.techgen.kafka.entity.Book;
@@ -20,6 +22,35 @@ public class LibraryEventService {
 	}
 
 	public void processRecordsToDB(LibraryEvent libraryEventDto) {
+		switch (libraryEventDto.getLibraryEventType()) {
+		case NEW: {
+			processLibraryEvent(libraryEventDto);
+			log.info("record inserted successfully into DB");
+			break;
+		}
+		case UPDATE: {
+			validateLibraryEvent(libraryEventDto);
+			processLibraryEvent(libraryEventDto);
+			log.info("record updated successfully into DB");
+			break;
+		}
+		default:
+			log.info("invalid library event type");
+		}
+	}
+
+	private void validateLibraryEvent(LibraryEvent libraryEventDto) {
+		if (libraryEventDto.getLibraryEventId() == null) {
+			throw new IllegalArgumentException("Library eventId is missing");
+		}
+		Optional<com.techgen.kafka.entity.LibraryEvent> libraryEventOptional = libraryEventRepository
+				.findById(libraryEventDto.getLibraryEventId());
+		if (!libraryEventOptional.isPresent()) {
+			throw new IllegalArgumentException("Invalid Library eventId");
+		}
+	}
+
+	private com.techgen.kafka.entity.LibraryEvent processLibraryEvent(LibraryEvent libraryEventDto) {
 		com.techgen.kafka.entity.LibraryEvent libraryEvent = new com.techgen.kafka.entity.LibraryEvent();
 		libraryEvent.setLibraryEventId(libraryEventDto.getLibraryEventId());
 		libraryEvent.setLibraryEventType(libraryEventDto.getLibraryEventType());
@@ -30,7 +61,7 @@ public class LibraryEventService {
 		book.setLibraryEvent(libraryEvent);
 		libraryEvent.setBook(book);
 		libraryEventRepository.save(libraryEvent);
-		log.info("record processed successfully to DB");
+		return libraryEvent;
 	}
 
 }
