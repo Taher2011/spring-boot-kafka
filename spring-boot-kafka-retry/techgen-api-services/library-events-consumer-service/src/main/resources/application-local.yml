@@ -1,0 +1,27 @@
+server:
+  port: 6061
+spring:
+  kafka:
+    topic: library-retry-event-topic
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: library-events-group
+      auto-offset-reset: earliest
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kafka
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

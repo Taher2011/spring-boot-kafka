@@ -1,0 +1,10 @@
+server: 
+  port: 6060
+  
+spring:
+   kafka:
+     topic: library-retry-event-topic
+     producer:
+        bootstrap-servers: localhost:9092
+        key-serializer: org.apache.kafka.common.serialization.IntegerSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
