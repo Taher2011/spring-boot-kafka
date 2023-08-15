@@ -1,4 +1,4 @@
-package com.techgen.kafka.model;
+package com.techgen.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

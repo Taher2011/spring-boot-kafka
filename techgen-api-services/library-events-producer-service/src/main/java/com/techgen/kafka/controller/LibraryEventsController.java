@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.techgen.kafka.enums.LibraryEventType;
-import com.techgen.kafka.model.LibraryEvent;
+import com.techgen.enums.LibraryEventType;
 import com.techgen.kafka.producer.LibraryEventsProducer;
+import com.techgen.model.LibraryEvent;
 
 import lombok.extern.slf4j.Slf4j;
 

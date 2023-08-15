@@ -1,6 +1,6 @@
-package com.techgen.kafka.model;
+package com.techgen.model;
 
-import com.techgen.kafka.enums.LibraryEventType;
+import com.techgen.enums.LibraryEventType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

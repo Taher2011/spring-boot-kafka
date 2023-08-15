@@ -1,4 +1,4 @@
-package com.techgen.kafka.enums;
+package com.techgen.enums;
 
 public enum LibraryEventType {
 
